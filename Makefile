@@ -12,10 +12,10 @@ RM = rm -f
 ###############################################################################
 .PHONY: clean fclean all test
 ###############################################################################
-all:		fclean ${NAME} clean
+all:		fclean ${NAME}
 
 ${NAME}:
-		gcc -c -Wall -Wextra -Werror ${CFILES} ${HFILES}
+		@${CC} -c ${CFLAGS} ${CFILES}
 		@${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS}
 
 clean:
