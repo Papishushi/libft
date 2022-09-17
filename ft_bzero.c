@@ -6,7 +6,7 @@
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/17 00:21:16 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/17 02:14:55 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	ft_bzero(void *s, size_t n)
 
 	i = 0;
 	buff = (unsigned char *)s;
-	while (i++ < n)
-		*(buff++) = 0;
+	while (i < n)
+		buff[i++] = 0;
 }
