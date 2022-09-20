@@ -43,6 +43,9 @@
 		"stddef.h": "c",
 		"libft.h": "c",
 		"stdlib.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"iterator": "c",
+		"xmemory": "c",
+		"xutility": "c"
 	}
 }

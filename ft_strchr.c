@@ -6,7 +6,7 @@
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/17 01:34:00 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:08:53 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	if (!ft_isascii(c) && c)
-		return ((char	*)s);
+		return ((char *)s);
 	while (s[i])
 	{
 		if (s[i] == c)
-			return ((char	*)s + i);
+			return ((char *)s + i);
 		i++;
 	}
 	if (c == 0)
-		return ((char	*)s + i);
+		return ((char *)s + i);
 	return (0);
 }

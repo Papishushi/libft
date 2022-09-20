@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/17 18:01:03 by dmoliner         ###   ########.fr       */
+/*   Created: 2022/09/17 20:31:15 by dmoliner          #+#    #+#             */
+/*   Updated: 2022/09/17 20:32:43 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "unistd.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
+	size_t	len;
 
-	i = 0;
-	while (i < n)
-	{
-		if (s1[i] < s2[i])
-			return (-1);
-		else if (s1[i] > s2[i])
-			return (1);
-		else
-			i++;
-	}
-	return (0);
+	len = ft_strlen(s);
+	write(fd, s, len);
 }
