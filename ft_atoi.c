@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmoliner <dmoliner@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/17 19:07:52 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:56:27 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static char	*get_lenght(const char *nptr, size_t *len)
 {
-	int	hassymbol;
+	char	hassymbol;
 
 	hassymbol = 0;
-	while (nptr && *nptr)
+	while (*nptr)
 	{
 		if (*nptr && !(*len) && !ft_isalnum(*nptr))
 		{
@@ -37,28 +37,41 @@ static char	*get_lenght(const char *nptr, size_t *len)
 	return ((char *)nptr - *len);
 }
 
+static unsigned int	ft_pow10(size_t factor)
+{
+	unsigned int	result;
+
+	result = 1;
+	while (factor--)
+		result *= 10;
+	return (result);
+}
+
 int	ft_atoi(const char *nptr)
 {
-	size_t	len;
-	size_t	i;
-	char	*start;
-	int		factor;
-	int		result;
+	size_t			i;
+	size_t			len;
+	char			isneg;
+	char			*start;
+	unsigned long	result;
 
-	i = 1;
-	factor = 1;
+	if (!nptr)
+		return (0);
+	i = 0;
 	result = 0;
 	len = 0;
 	start = get_lenght(nptr, &len);
-	while (i++ < len)
-		factor *= 10;
-	i = 0;
+	isneg = *(start - 1) == '-';
 	while (i < len)
 	{
-		result += ((int)start[i++] - 48) * factor;
-		factor *= 0.1f;
+		result += (start[len - i - 1] - 48) * ft_pow10(i);
+		i++;
+		if (result > 0xfffffffff && isneg)
+			return (-1);
+		else if (result > 0xfffffffff)
+			return (0);
 	}
-	if (*(start - 1) == '-')
-		result *= -1;
+	if (isneg)
+		return (result * -1);
 	return (result);
 }

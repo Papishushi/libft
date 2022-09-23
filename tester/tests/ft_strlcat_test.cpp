@@ -15,7 +15,7 @@ int main(void)
 {
 	signal(SIGSEGV, sigsegv);
 	title("ft_strlcat\t: ")
-	
+
 	char dest[30]; memset(dest, 0, 30);
 	char * src = (char *)"AAAAAAAAA";
 	dest[0] = 'B';

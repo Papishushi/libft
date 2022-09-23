@@ -5,18 +5,19 @@ SBUILDER = ar
 SBFLAGS = -crs
 CFILES = $(wildcard *.c)
 OBJS = ${CFILES:.c=.o}
-HFILES = libft.h
 NAME = libft.a
 ###############################################################################
 RM = rm -f
 ###############################################################################
 .PHONY: clean fclean all test
 ###############################################################################
-all:		fclean ${NAME}
+all:		${NAME}
 
 ${NAME}:
 		@${CC} -c ${CFLAGS} ${CFILES}
 		@${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS}
+
+re:		fclean all
 
 clean:
 		@${RM} ${OBJS}

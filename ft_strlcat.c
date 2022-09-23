@@ -28,14 +28,23 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	maxappend;
 
 	oglen = ft_strlen(dst);
-	maxappend = size - oglen - 1;
 	i = oglen;
+	maxappend = size - oglen;
 	while (i < oglen + size)
 	{
-		dst[i] = src[i - oglen];
-		if ((i - oglen) >= maxappend || dst[i] == '\0')
+		if (i != oglen + size - 1)
+			dst[i] = src[i - oglen];
+		if ((i - oglen) > maxappend || !dst[i])
 			return (oglen + ft_strlen(src));
+		else if ((i - oglen) < oglen && i - oglen)
+			break ;
 		i++;
 	}
+	if (i > 1)
+		dst[--i] = 0;
+	if (size <= oglen && size)
+		return (ft_strlen(src) + size);
+	else if (size > oglen && size)
+		return (ft_strlen(src) + oglen);
 	return (ft_strlen(src));
 }

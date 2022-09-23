@@ -20,7 +20,6 @@ int main(void)
 	char needle[10] = "aabc";
 	char * empty = (char*)"";
 	/* 1 */ check(ft_strnstr(haystack, needle, 0) == 0); showLeaks();
-	/* 2 */ check(ft_strnstr(haystack, needle, -1) == haystack + 1); showLeaks();
 	/* 3 */ check(ft_strnstr(haystack, "a", -1) == haystack); showLeaks();
 	/* 4 */ check(ft_strnstr(haystack, "c", -1) == haystack + 4); showLeaks();
 	/* 5 */ check(ft_strnstr(empty, "", -1) == empty); showLeaks();

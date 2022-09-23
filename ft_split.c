@@ -6,7 +6,7 @@
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:01:26 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/18 18:01:26 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:13:37 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ static size_t	get_count(char const *s, char c)
 	{
 		if (i == 0 && s[i] != c)
 			count++;
-		if (s[i++] == c && s[i] != c)
+		if (s[i] != c && s[i + 1] == 0)
+			count++;
+		if (s[i++] == c && (s[i] != c || s[i] == 0))
 			count++;
 	}
 	return (count);
@@ -53,31 +55,42 @@ static char	*cutstr(char const *s, char c)
 	return (buff);
 }
 
-static void mainprocess(char const *s, char c, char	**buff)
+static void	cutloop(char const *s, char c, char	**buff, size_t count)
 {
 	size_t	i;
-	size_t	count;
 	char	*temp;
 
 	i = 0;
-	count = get_count(s, c);
-	if (count == 1)
-		count++;
-	if (*s != c)
-	{
-		buff[i++] = cutstr(s, c);
-		if (count == 2)
-			return;
-	}
-	while(i < count)
+	while (i < count)
 	{
 		temp = ft_strchr(s, c) + 1;
 		while (*temp && *temp == c)
 			temp++;
+		if (!temp || !*temp)
+			break ;
+		if (!ft_strchr(temp, c))
+		{
+			buff[i] = ft_strdup(temp);
+			break ;
+		}
 		buff[i++] = cutstr(temp, c);
 		s = temp;
 	}
+}
+
+static void	mainprocess(char const *s, char c, char	**buff)
+{
+	size_t	count;
+
+	count = get_count(s, c);
 	buff[count - 1] = 0;
+	if (*s != c)
+	{
+		*(buff++) = cutstr(s, c);
+		if (count == 2)
+			return ;
+	}
+	cutloop(s, c, buff, count);
 }
 
 char	**ft_split(char const *s, char c)
@@ -85,11 +98,16 @@ char	**ft_split(char const *s, char c)
 	char	**buffer;
 
 	if (*s == 0)
-		return (ft_calloc(1, sizeof(char *)));
+	{
+		buffer = ft_calloc(1, sizeof(char *));
+		buffer[0] = 0;
+		return (buffer);
+	}
 	if (c == '\0' || !ft_strchr(s, c))
 	{
 		buffer = ft_calloc(2, sizeof(char *));
 		buffer[0] = ft_strdup(s);
+		buffer[1] = 0;
 		return (buffer);
 	}
 	buffer = ft_calloc(get_count(s, c), sizeof(char *));
