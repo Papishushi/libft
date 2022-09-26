@@ -39,6 +39,7 @@ int main(void)
 	lseek(fd, SEEK_SET, 0);
 	read(fd, s, 11);
 	/* 3 */ check(!strcmp(s, to_string(INT_MAX).c_str())); showLeaks();
+	printf("%s\n",s);
 	unlink("./tripouille");
 
 	fd = open("tripouille", O_RDWR | O_CREAT, 0777);
@@ -46,6 +47,7 @@ int main(void)
 	lseek(fd, SEEK_SET, 0);
 	read(fd, s, 12);
 	/* 4 */ check(!strcmp(s, to_string(INT_MIN).c_str())); showLeaks();
+	printf("%s\n", s);
 	unlink("./tripouille");
 
 	fd = open("tripouille", O_RDWR | O_CREAT, 0777);
@@ -53,6 +55,7 @@ int main(void)
 	lseek(fd, SEEK_SET, 0);
 	s[read(fd, s, 4)] = 0;
 	/* 5 ipenas */ check(!strcmp(s, "-42")); showLeaks();
+	printf("%s\n",s);
 	unlink("./tripouille");
 	write(1, "\n", 1);
 	return (0);

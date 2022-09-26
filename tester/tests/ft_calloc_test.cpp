@@ -16,9 +16,12 @@ int main(void)
 	signal(SIGSEGV, sigsegv);
 	title("ft_calloc\t: ")
 
-	void * p = ft_calloc(2, 2);
-	char e[] = {0, 0, 0, 0};
-	/* 1 */ check(!memcmp(p, e, 4));
+	void *p = ft_calloc(2, 2);
+	if (!p)
+		return (2);
+	bool c = false;
+	c = !memcmp(p, (void *)((char []){0, 0, 0, 0}), 4);
+	/* 1 */ check(c);
 	/* 2 */ mcheck(p, 4); free(p); showLeaks();
 	/* 3 */ check(ft_calloc(SIZE_MAX, SIZE_MAX) == NULL);
 	write(1, "\n", 1);

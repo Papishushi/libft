@@ -1,6 +1,6 @@
 ###############################################################################
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -s
 SBUILDER = ar
 SBFLAGS = -crs
 CFILES = $(wildcard *.c)
@@ -9,9 +9,9 @@ NAME = libft.a
 ###############################################################################
 RM = rm -f
 ###############################################################################
-.PHONY: clean fclean all test
+.PHONY: clean fclean all
 ###############################################################################
-all:		${NAME}
+all:	fclean ${NAME}
 
 ${NAME}:
 		@${CC} -c ${CFLAGS} ${CFILES}

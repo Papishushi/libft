@@ -36,12 +36,16 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 			dst[i] = src[i - oglen];
 		if ((i - oglen) > maxappend || !dst[i])
 			return (oglen + ft_strlen(src));
-		else if ((i - oglen) < oglen && i - oglen)
+		else if ((i - oglen) <= oglen && (i - oglen))
+		{
+			if (size > oglen && size)
+				i++; //WTF
 			break ;
+		}
 		i++;
 	}
 	if (i > 1)
-		dst[--i] = 0;
+		dst[i - 1] = 0;
 	if (size <= oglen && size)
 		return (ft_strlen(src) + size);
 	else if (size > oglen && size)
