@@ -6,7 +6,7 @@
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 21:05:14 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/17 21:22:12 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:40:00 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@ int	ft_putnbr_sp(int *nb, char *buffer)
 	{
 		*nb *= -1;
 		buffer[0] = '-';
+		if (*nb > -10)
+		{
+			temp = *nb + '0';
+			buffer[1] = temp;
+			return (0);
+		}
 	}
-	if (*nb < 10)
+	else if (*nb < 10)
 	{
 		temp = *nb + '0';
 		buffer[0] = temp;
@@ -37,6 +43,8 @@ char	*ft_itoa(int n)
 	int		lenght;
 	int		i;
 
+	if (n == INT_MIN)
+		return (ft_strdup("-2147483648"));
 	lenght = 0;
 	ft_bzero(reverse_buffer, 11);
 	if (!ft_putnbr_sp(&n, buffer))

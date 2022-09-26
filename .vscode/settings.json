@@ -46,6 +46,11 @@
 		"stdio.h": "c",
 		"iterator": "c",
 		"xmemory": "c",
-		"xutility": "c"
+		"xutility": "c",
+		"__bit_reference": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"__locale": "c",
+		"unistd.h": "c"
 	}
 }

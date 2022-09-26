@@ -1,6 +1,6 @@
 ###############################################################################
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -s
+CFLAGS = -Wall -Wextra -Werror
 SBUILDER = ar
 SBFLAGS = -crs
 CFILES = $(wildcard *.c)

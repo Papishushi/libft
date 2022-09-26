@@ -6,13 +6,13 @@
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 20:04:16 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/17 20:16:04 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:06:49 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;

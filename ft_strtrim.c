@@ -6,7 +6,7 @@
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 20:41:44 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/18 17:33:17 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:20:29 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static unsigned char	contains(char const *set, const char c)
 {
-	while(*set)
+	while (*set)
 		if (*(set++) == c)
 			return (1);
 	return (0);
@@ -36,7 +36,7 @@ static unsigned char	matches(char const *set, char const *input)
 	return (0);
 }
 
-static char *count_noset(size_t *count, char const *s1, char const *set)
+static char	*count_noset(size_t *count, char const *s1, char const *set)
 {
 	size_t	i;
 	char	*start;

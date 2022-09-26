@@ -3,57 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmoliner <dmoliner@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 20:36:08 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/26 01:44:57 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:06:42 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "unistd.h"
-#include <stdio.h>
-
-size_t	get_len(int n)
-{
-	size_t	i;
-	int		temp;
-
-	i = 0;
-	temp = n;
-	while (temp >= 1)
-	{
-		temp /= 10;
-		i++;
-	}
-	return (i);
-}
+#include <unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	size_t	i;
-	size_t	len;
-	char	temp[13];
-	char	inv[13];
+	char	temp[1];
 
-	i = 0;
-	len = get_len(n);
-	if (len == 0)
-		return ;
-	temp[12] = 0;
-	inv[12] = 0;
-	if (n == 0)
-		write(fd, "0", 1);
-	else if (n < 0)
-		write(fd, "-", 1);
-	while (n >= 1)
+	temp[0] = n + '0';
+	if (n < 0)
 	{
-		temp[i] = n % 10 + '0';
-		inv[len - i] = temp[i];
-		if (!(n >= 10))
-			inv[len - 1] = n + '0';
-		n /= 10;
-		i++;
+		if (n == INT_MIN)
+		{
+			write(fd, "-2147483648", 12);
+			return ;
+		}
+		write (fd, "-", 1);
+		n *= -1;
 	}
-	write(fd, inv, len);
+	if (n / 10 > 0)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	if (ft_isdigit(temp[0]))
+		write(fd, temp, 1);
 }
