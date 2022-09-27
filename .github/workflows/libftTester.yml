@@ -29,8 +29,8 @@ jobs:
         # uses: aminya/setup-cpp@6a6782082945bb23835faa27401f69d13481850d
         uses: aminya/setup-cpp@v0.20.0
         with:
-          gcc: 12.2.0
-          make: 4.2.1
+          gcc: 10
+          make:
           
       # Runs a set of commands using the runners shell
       - name: Test
