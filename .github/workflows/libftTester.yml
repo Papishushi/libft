@@ -29,9 +29,6 @@ jobs:
         # uses: aminya/setup-cpp@6a6782082945bb23835faa27401f69d13481850d
         uses: aminya/setup-cpp@v0.20.0
         with:
-          # The compiler to use and its optional version separated by - e.g. llvm-13.0.0
-          compiler: gcc-12.2.0
-          architecture: 64x
           gcc: 12.2.0
           make: 4.2.1
           
