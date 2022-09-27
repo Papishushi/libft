@@ -19,9 +19,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        with:
-              path: './tester/'
-
+      
       # Runs a single command using the runners shell
       - name: Welcome
         run: echo Welcome to the tester!
