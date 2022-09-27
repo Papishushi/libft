@@ -24,3 +24,7 @@ clean:
 
 fclean:		clean
 		@${RM} ${NAME}
+		
+actions:
+		cd ./tester/
+		make m
