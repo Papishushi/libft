@@ -26,4 +26,4 @@ jobs:
           
       # Runs a set of commands using the runners shell
       - name: Test
-        run:  make actions
+        run:  make -f tester/Makefile
