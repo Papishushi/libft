@@ -33,4 +33,4 @@ jobs:
           
       # Runs a set of commands using the runners shell
       - name: Test
-        run:  make -C ./tester m 
+        run:  make -C tester/ m 
