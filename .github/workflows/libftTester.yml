@@ -33,6 +33,4 @@ jobs:
           
       # Runs a set of commands using the runners shell
       - name: Test
-        run: |
-          cd "$GITHUB_WORKSPACE"/tester
-          make m
+        run:  make m ./tester
