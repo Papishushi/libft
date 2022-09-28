@@ -14,9 +14,11 @@ jobs:
     runs-on: macOS-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: checkout repo
+      - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: Set xterm
+        run:  | 
+                export TERM=xterm-256color
       - name: Test
         run:  |
-                $TERM=bash
                 make -f $GITHUB_WORKSPACE/tester/Makefile
