@@ -16,10 +16,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Set xterm
-        run:  export TERM=xterm
-      - name: Test
+      - name: Set $TERM & Test
         run:  |
                 export TERM=xterm
                 make actions
+      - name: Upload output files
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: .o
+          path: $(wildcard *.o)
+          if-no-files-found: warn
+          retention-days: 1
+      - name: Upload output library
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: .a
+          path: libft.a
+          if-no-files-found: warn
+          retention-days: 1
 
