@@ -21,4 +21,4 @@ jobs:
                 export TERM=xterm
       - name: Test
         run:  |
-                make -f $GITHUB_WORKSPACE/tester/Makefile
+                make -f tester/Makefile
