@@ -17,9 +17,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Set xterm
-        run:  | 
-                export TERM=xterm
+        run:  export TERM=xterm
       - name: Test
-        run:  |
-                make 
-                make -f tester/Makefile
+        run:  make actions
