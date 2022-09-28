@@ -19,4 +19,7 @@ jobs:
       - name: Set xterm
         run:  export TERM=xterm
       - name: Test
-        run:  make actions
+        run:  |
+                export TERM=xterm
+                make actions
+
