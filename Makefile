@@ -28,3 +28,5 @@ fclean:		clean
 		
 actions:	
 		cd tester && make m
+		cd libft-unit-test && make f
+		cd libft-war-machine && ./grademe.sh
