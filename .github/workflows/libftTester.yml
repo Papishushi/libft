@@ -21,4 +21,5 @@ jobs:
                 export TERM=xterm
       - name: Test
         run:  |
+                make 
                 make -f tester/Makefile
