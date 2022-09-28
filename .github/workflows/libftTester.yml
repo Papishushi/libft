@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Set xterm
         run:  | 
-                export TERM=xterm-256color
+                export TERM=xterm
       - name: Test
         run:  |
                 make -f $GITHUB_WORKSPACE/tester/Makefile
