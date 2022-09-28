@@ -17,4 +17,6 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: Test
-        run:  make -f $GITHUB_WORKSPACE/tester/Makefile
+        run:  |
+                $TERM=bash
+                make -f $GITHUB_WORKSPACE/tester/Makefile
