@@ -11,9 +11,8 @@ NAME = libft.a
 SHELL=/bin/bash
 ###############################################################################
 RM = rm -f
-ACTIONS_TEST = cd tester && make
 ###############################################################################
-.PHONY: clean bclean fclean all bonus actions
+.PHONY: clean bclean fclean all bonus
 ###############################################################################
 all:	fclean ${NAME} bonus
 
@@ -35,6 +34,3 @@ bclean:
 
 fclean:	clean bclean
 		@${RM} ${NAME}
-
-actions:
-		@${ACTIONS_TEST}
