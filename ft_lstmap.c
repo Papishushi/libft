@@ -25,7 +25,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	buffer = ft_calloc(len, sizeof(t_list));
 	while (i < len)
 	{
-		buffer[i++] = ft_lstnew(f(lst->content));
+		buffer[i] = ft_lstnew(f(lst->content));
+		if (i != 0)
+			buffer[i - 1]->next = buffer[i];
+		i++;
 		lst = lst->next;
 	}
 	buffer[i] = (void *)0;

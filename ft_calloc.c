@@ -6,7 +6,7 @@
 /*   By: dmoliner <dmoliner@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/24 21:48:36 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:31:22 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	buff = 0;
 	if (nmemb == 0 || size == 0 || \
 		nmemb == ULONG_MAX || size == ULONG_MAX)
-		return (0);
-	buff = malloc(size * nmemb);
-	ft_bzero(buff, nmemb);
+		return ((void *)0);
+	buff = ft_memset(malloc(size * nmemb), 0, nmemb * size);
 	return (buff);
 }
