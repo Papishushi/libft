@@ -11,6 +11,7 @@ NAME = libft.a
 SHELL=/bin/bash
 ###############################################################################
 RM = rm -f
+ACTIONS_TEST = cd tester && make
 ###############################################################################
 .PHONY: clean bclean fclean all bonus actions
 ###############################################################################
@@ -36,6 +37,4 @@ fclean:	clean bclean
 		@${RM} ${NAME}
 
 actions:
-		cd tester && make
-		##cd libft-unit-test && make f
-		##cd libft-war-machine && ./grademe.sh
+		@${ACTIONS_TEST}

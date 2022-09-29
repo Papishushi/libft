@@ -11,10 +11,12 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	**buffer;
+	t_list	*result;
 	int		len;
 	int		i;
 
@@ -22,7 +24,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		return ((void *)0);
 	i = 0;
 	len = ft_lstsize(lst);
-	buffer = ft_calloc(len, sizeof(t_list));
+	if (!len)
+		return ((void *)0);
+	buffer = ft_calloc(len, sizeof(t_list *));
 	while (i < len)
 	{
 		buffer[i] = ft_lstnew(f(lst->content));
@@ -31,6 +35,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		i++;
 		lst = lst->next;
 	}
-	buffer[i] = (void *)0;
-	return (*buffer);
+	result = *buffer;
+	del(buffer);
+	return (result);
 }
