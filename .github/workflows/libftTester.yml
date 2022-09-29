@@ -19,8 +19,7 @@ jobs:
       - name: Set $TERM & Test
         run:  |
                 export TERM=xterm
-                cd lib
-                make actions
+                cd lib && make actions
       - name: Upload output files
         uses: actions/upload-artifact@v3.1.0
         with:
