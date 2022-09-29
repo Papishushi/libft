@@ -15,6 +15,7 @@ CFLAGS	= -g3 -ldl -std=c++11 -I utils/ -I$(LIBFT_PATH)
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Linux)
 	VALGRIND = valgrind -q --leak-check=full --track-origins=yes
+##	VALGRIND = valgrind -q --leak-check=full
 endif
 ifeq ($(IN_DOCKER),TRUE)
 	LIBFT_PATH = /project/

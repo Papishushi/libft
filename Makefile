@@ -14,14 +14,14 @@ RM = rm -f
 ###############################################################################
 .PHONY: clean fclean all bonus actions
 ###############################################################################
-all:	fclean ${NAME}
+all:	fclean bclean ${NAME} bonus
 
 ${NAME}:
-		@${CC} -c ${CFLAGS} ${MFILES}
+		@${CC} -g -c ${CFLAGS} ${MFILES}
 		@${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS}
 
 bonus:
-		@${CC} -c ${CFLAGS} ${BFILES}
+		@${CC} -g -c ${CFLAGS} ${BFILES}
 		@${SBUILDER} ${SBFLAGS} ${NAME} ${BOBJS}
 
 re:		fclean all

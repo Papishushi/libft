@@ -18,7 +18,7 @@ int main(void)
 	signal(SIGSEGV, sigsegv);
 	title("ft_lstadd_back\t: ")
 
-	t_list * l =  NULL; t_list * l2 =  NULL; 
+	t_list * l =  NULL; t_list * l2 =  NULL;
 	ft_lstadd_back(&l, ft_lstnew((void*)1));
 	/* 1 */ check(l->content == (void*)1);
 	/* 2 */ check(l->next == 0);

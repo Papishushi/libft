@@ -14,15 +14,20 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*buffer;
+	t_list	**buffer;
 	int		len;
 	int		i;
 
+	if (!lst || !f || !del)
+		return ((void *)0);
 	i = 0;
 	len = ft_lstsize(lst);
 	buffer = ft_calloc(len, sizeof(t_list));
-	f(buffer);
-	del(buffer);
-	i++;
-	return (0);
+	while (i < len)
+	{
+		buffer[i++] = ft_lstnew(f(lst->content));
+		lst = lst->next;
+	}
+	buffer[i] = (void *)0;
+	return (*buffer);
 }

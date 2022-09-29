@@ -20,7 +20,7 @@ int	ft_putnbr_sp(int *nb, char *buffer)
 	{
 		*nb *= -1;
 		buffer[0] = '-';
-		if (*nb > -10)
+		if (*nb < 10)
 		{
 			temp = *nb + '0';
 			buffer[1] = temp;
