@@ -12,9 +12,9 @@ SHELL=/bin/bash
 ###############################################################################
 RM = rm -f
 ###############################################################################
-.PHONY: clean fclean all bonus actions
+.PHONY: clean bclean fclean all bonus actions
 ###############################################################################
-all:	fclean bclean ${NAME} bonus
+all:	fclean ${NAME} bonus
 
 ${NAME}:
 		@${CC} -g -c ${CFLAGS} ${MFILES}
@@ -36,6 +36,6 @@ fclean:	clean bclean
 		@${RM} ${NAME}
 
 actions:
-		cd tester && make m
+		cd tester && make
 		##cd libft-unit-test && make f
 		##cd libft-war-machine && ./grademe.sh
