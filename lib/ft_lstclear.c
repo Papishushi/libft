@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmoliner <dmoliner@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:15:18 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/29 17:57:07 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/30 09:46:11 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static void	ft_sp_lstiter(t_list *lst, void (*f)(void *))
-{
-	if (!lst || !f)
-		return ;
-	f(lst->content);
-	if (lst->next)
-		ft_sp_lstiter(lst->next, f);
-	free(lst);
-}
-
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
+	t_list	*temp;
+	t_list	*to_free;
+
 	if (!lst || !del)
 		return ;
-	ft_sp_lstiter(*lst, del);
+	temp = *lst;
+	while (temp)
+	{
+		del(temp->content);
+		to_free = temp;
+		temp = temp->next;
+		free(to_free);
+	}
 	*lst = (void *)0;
 }

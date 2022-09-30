@@ -19,9 +19,9 @@ t_list	*ft_lstnew(void *content)
 	result = ft_calloc(1, sizeof(t_list));
 	if (!result)
 		return ((void *)0);
-	result->content = 0;
+	result->content = (void *)0;
 	if (content)
 		result->content = content;
-	result->next = (void *)0;
+	result->next = (t_list *)0;
 	return (result);
 }
