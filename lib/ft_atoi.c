@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmoliner <dmoliner@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/22 17:56:27 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:44:12 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	ft_atoi(const char *nptr)
 	{
 		result += (start[len - i - 1] - 48) * ft_pow10(i);
 		i++;
-		if (result > 0xfffffffff && isneg)
+		if (result > LONG_MAX && isneg)
 			return (-1);
-		else if (result > 0xfffffffff)
+		else if (result > LONG_MAX)
 			return (0);
 	}
 	if (isneg)

@@ -6,7 +6,7 @@
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:01:26 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/20 18:13:37 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:26:28 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ char	**ft_split(char const *s, char c)
 {
 	char	**buffer;
 
+	if (!s)
+		return (0);
 	if (*s == 0)
 	{
 		buffer = ft_calloc(1, sizeof(char *));
@@ -111,6 +113,8 @@ char	**ft_split(char const *s, char c)
 		return (buffer);
 	}
 	buffer = ft_calloc(get_count(s, c), sizeof(char *));
+	if (!buffer)
+		return (0);
 	mainprocess(s, c, buffer);
 	return (buffer);
 }
