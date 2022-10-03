@@ -1,4 +1,4 @@
-# libft [![libftTester](https://github.com/Papishushi/libft/actions/workflows/libftTester.yml/badge.svg)](https://github.com/Papishushi/libft/actions/workflows/libftTester.yml)
+# libft [![libftTester](https://github.com/Papishushi/libft/actions/workflows/libftTester.yml/badge.svg)](https://github.com/Papishushi/libft/actions/workflows/libftTester.yml) [![Norminette](https://github.com/Papishushi/libft/actions/workflows/norminette.yml/badge.svg)](https://github.com/Papishushi/libft/actions/workflows/norminette.yml)
 ## Your very first own library
 
 _Summary:
