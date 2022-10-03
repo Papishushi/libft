@@ -8,6 +8,7 @@ BFILES = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lsti
 OBJS = ${MFILES:.c=.o}
 BOBJS = ${BFILES:.c=.o}
 NAME = libft.a
+TOBJS = ${OBJS}
 ###############################################################################
 RM = rm -f
 ###############################################################################
@@ -15,11 +16,11 @@ RM = rm -f
 ###############################################################################
 all:	${NAME} bonus
 
-${NAME}:${OBJS}
-		@${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS}
-
 bonus:	${OBJS} ${BOBJS}
-		@${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS} ${BOBJS}
+		$(eval TOBJS=${OBJS} ${BOBJS})
+
+${NAME}: ${TOBJS}
+		 ${SBUILDER} ${SBFLAGS} ${NAME} ${TOBJS}
 
 re:		fclean all
 
