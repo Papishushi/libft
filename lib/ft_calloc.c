@@ -6,7 +6,7 @@
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/30 21:37:28 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:53:28 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	temp = 0;
 	if (!size)
 		return (malloc(1 * nmemb));
-	if (nmemb == 0 ||  size >= ULONG_MAX || \
+	if (nmemb == 0 || size >= ULONG_MAX || \
 		nmemb >= ULONG_MAX)
 		return ((void *)0);
 	temp = malloc(size * nmemb);

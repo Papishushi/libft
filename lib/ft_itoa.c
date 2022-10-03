@@ -40,13 +40,14 @@ char	*ft_itoa(int n)
 {
 	char	buffer[12];
 	char	reverse_buffer[12];
-	int		lenght;
-	int		i;
+	size_t	lenght;
+	size_t	i;
 
 	if (n == INT_MIN)
 		return (ft_strdup("-2147483648"));
 	lenght = 0;
-	ft_bzero(reverse_buffer, 11);
+	ft_memset(reverse_buffer, 0, 12 * sizeof(char));
+	ft_memset(buffer, 0, 12 * sizeof(char));
 	if (!ft_putnbr_sp(&n, buffer))
 		return (ft_strdup(buffer));
 	i = 0;
@@ -57,7 +58,7 @@ char	*ft_itoa(int n)
 	}
 	while (i <= lenght)
 	{
-		buffer[i] = reverse_buffer[lenght - 1 - i];
+		buffer[i] = reverse_buffer[lenght - i - 1];
 		i++;
 	}
 	return (ft_strdup(buffer));

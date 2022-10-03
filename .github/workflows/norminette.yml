@@ -1,0 +1,20 @@
+name: Norminette
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+jobs:
+  dl-norminette:
+    runs-on: macos-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - name: Download Norminette
+        run: |
+            python3 -m pip install --upgrade pip setuptools
+            python3 -m pip install norminette
+      - name: Run Norminette
+        run: |
+            norminette lib/
