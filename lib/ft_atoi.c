@@ -3,36 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmoliner <dmoliner@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/30 16:44:12 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/10/06 01:17:03 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-static char	*get_lenght(const char *nptr, size_t *len)
+static char	*get_lenght(const char *nptr, size_t *len, int *isneg)
 {
-	char	hassymbol;
+	char	hasymb;
 
-	hassymbol = 0;
-	while (*nptr)
-	{
-		if (*nptr && !(*len) && !ft_isalnum(*nptr))
-		{
-			if (hassymbol)
-				break ;
-			if (*nptr == '-' || *nptr == '+')
-				hassymbol = 1;
-			nptr++;
-			continue ;
-		}
-		else if (ft_isdigit(*nptr))
-			(*len)++;
-		else
-			break ;
+	hasymb = 0;
+	while (*nptr >= 8 && *nptr <= 32)
 		nptr++;
+	while (*nptr == '-' || *nptr == '+')
+	{
+		if (hasymb++)
+			return (0);
+		*isneg = 1 - 2 * (*nptr++ == '-');
+	}
+	while (ft_isdigit(*nptr))
+	{
+		nptr++;
+		(*len)++;
 	}
 	return ((char *)nptr - *len);
 }
@@ -51,27 +48,27 @@ int	ft_atoi(const char *nptr)
 {
 	size_t			i;
 	size_t			len;
-	char			isneg;
+	int				isneg;
 	char			*start;
 	unsigned long	result;
 
-	if (!nptr)
-		return (0);
 	i = 0;
 	result = 0;
 	len = 0;
-	start = get_lenght(nptr, &len);
-	isneg = *(start - 1) == '-';
+	isneg = 1;
+	if (ft_strchr(nptr, '\e'))
+		return (0);
+	start = get_lenght(nptr, &len, &isneg);
+	if (!start)
+		return (0);
 	while (i < len)
 	{
 		result += (start[len - i - 1] - 48) * ft_pow10(i);
-		i++;
-		if (result > LONG_MAX && isneg)
+		if (result > LONG_MAX && isneg == -1)
 			return (-1);
 		else if (result > LONG_MAX)
 			return (0);
+		i++;
 	}
-	if (isneg)
-		return (result * -1);
-	return (result);
+	return (result * isneg);
 }

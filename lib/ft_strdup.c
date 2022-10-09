@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmoliner <dmoliner@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/10/03 13:49:14 by dmoliner         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:37:13 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*ft_strdup(const char *s)
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (0);
 	len = ft_strlen(s);
 	if (!len)
 		return (ft_calloc(1, sizeof(char)));

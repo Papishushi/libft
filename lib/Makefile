@@ -6,6 +6,7 @@ SBUILDER = ar
 SBFLAGS = -crs
 ###############################################################################
 NAME = libft.a
+DYN_NAME = libft.so
 
 MFILES =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c		\
 			ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c			\
@@ -20,7 +21,7 @@ OBJS = ${MFILES:.c=.o}
 BOBJS = ${BFILES:.c=.o}
 IS_BONUS = false
 ###############################################################################
-.PHONY:  all fclean bonus bonus_check clean bclean
+.PHONY:  all fclean bonus bonus_check clean bclean so
 ###############################################################################
 #Build bonus objects then run rule $NAME.#
 all:	|	bonus_check ${BOBJS} ${NAME}
@@ -28,10 +29,10 @@ all:	|	bonus_check ${BOBJS} ${NAME}
 bonus:	|	all
 #Build mandatory objects and conditionally build the library.#
 ${NAME}:	${OBJS}
-			@if [ $(IS_BONUS) = "false" ]; then					\
-				${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS};			\
-			else												\
-				${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS} ${BOBJS};\
+			@if [ $(IS_BONUS) = "false" ]; then						\
+				${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS};				\
+			else													\
+				${SBUILDER} ${SBFLAGS} ${NAME} ${OBJS} ${BOBJS};	\
 			fi
 bonus_check:
 			$(eval IS_BONUS=true)
@@ -40,9 +41,13 @@ re:			fclean all
 #Clean mandatory objects, bonus objects and library.#
 fclean:		clean
 			@${RM} ${NAME}
+			@${RM} ${DYN_NAME}
 #Clean mandatory objects and bonus objects.#
 clean:		bclean
 			@${RM} ${OBJS}
 #Clean mandatory objects.#
 bclean:
 			@${RM} ${BOBJS}
+#Dynamic link compilation.#
+#	@${CC} -nostartfiles -fPIC ${CFLAGS} ${MFILES} ${BFILES}
+#	@${CC} -nostartfiles -shared -o ${DYN_NAME} ${OBJS} ${BOBJS}

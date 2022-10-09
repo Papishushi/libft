@@ -31,7 +31,8 @@ static size_t	cat_loop(size_t *i, char *dst, const char *src, size_t size)
 		else if ((*i - oglen) <= oglen && (*i - oglen))
 		{
 			if (size > oglen && size)
-				(*i)++;
+				if (++(*i) != oglen + maxappend)
+					continue ;
 			break ;
 		}
 		(*i)++;
@@ -54,9 +55,14 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	oglen;
 	size_t	temp;
 
+	if (!size)
+		return (ft_strlen(src));
+	else if (!dst && !size)
+		return (0);
 	oglen = ft_strlen(dst);
 	i = oglen;
-	temp = cat_loop(&i, dst, src, size);
+	if (size)
+		temp = cat_loop(&i, dst, src, size);
 	if (temp)
 		return (temp);
 	if (i > 1)

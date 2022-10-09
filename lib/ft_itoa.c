@@ -26,6 +26,7 @@ int	ft_putnbr_sp(int *nb, char *buffer)
 			buffer[1] = temp;
 			return (0);
 		}
+		return  (2);
 	}
 	else if (*nb < 10)
 	{
@@ -43,14 +44,18 @@ char	*ft_itoa(int n)
 	size_t	lenght;
 	size_t	i;
 
+	i = 0;
+	lenght = 0;
 	if (n == INT_MIN)
 		return (ft_strdup("-2147483648"));
-	lenght = 0;
+	else if (n == INT_MAX)
+		return (ft_strdup("2147483647"));
 	ft_memset(reverse_buffer, 0, 12 * sizeof(char));
 	ft_memset(buffer, 0, 12 * sizeof(char));
 	if (!ft_putnbr_sp(&n, buffer))
 		return (ft_strdup(buffer));
-	i = 0;
+	if (buffer[0] == '-')
+		i++;
 	while (n >= 1)
 	{
 		reverse_buffer[lenght++] = (n % 10) + '0';
@@ -58,7 +63,10 @@ char	*ft_itoa(int n)
 	}
 	while (i <= lenght)
 	{
-		buffer[i] = reverse_buffer[lenght - i - 1];
+		if (buffer[0] == '-')
+			buffer[i] = reverse_buffer[lenght - i];
+		else
+			buffer[i] = reverse_buffer[lenght - i - 1];
 		i++;
 	}
 	return (ft_strdup(buffer));

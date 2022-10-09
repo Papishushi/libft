@@ -15,9 +15,8 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	temp[1];
+	unsigned char	temp;
 
-	temp[0] = n + '0';
 	if (n < 0)
 	{
 		if (n == INT_MIN)
@@ -28,11 +27,12 @@ void	ft_putnbr_fd(int n, int fd)
 		write (fd, "-", 1);
 		n *= -1;
 	}
-	if (n / 10 > 0)
+	if (n / 10 >= 1)
 	{
 		ft_putnbr_fd(n / 10, fd);
 		ft_putnbr_fd(n % 10, fd);
 	}
-	if (ft_isdigit(temp[0]))
-		write(fd, temp, 1);
+	temp = n + '0';
+	if (ft_isdigit(temp))
+		write(fd, &temp, 1);
 }
