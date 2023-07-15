@@ -13,22 +13,15 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-	void	*temp;
-	void	*buff;
+	char	*ptr;
+	int		length;
 
-	buff = 0;
-	temp = 0;
-	if (!size)
-		return (malloc(1 * nmemb));
-	if (nmemb == 0 || size >= ULONG_MAX || \
-		nmemb >= ULONG_MAX)
-		return ((void *)0);
-	temp = malloc(size * nmemb);
-	if (temp)
-		buff = ft_memset(temp, 0, nmemb * size);
-	if (!buff)
+	length = size * count;
+	ptr = malloc(length);
+	if (!ptr || (length && (length / size != count)))
 		return (0);
-	return (buff);
+	ft_bzero(ptr, length);
+	return (ptr);
 }

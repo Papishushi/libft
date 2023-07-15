@@ -5,69 +5,81 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 21:05:14 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/26 17:40:00 by dmoliner         ###   ########.fr       */
+/*   Created: 2023/01/08 18:19:02 by dmoliner          #+#    #+#             */
+/*   Updated: 2023/01/08 18:21:25 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-int	ft_putnbr_sp(int *nb, char *buffer)
+static char	spe_putnbr(int nb)
 {
-	char	temp;
+	unsigned int	number;
 
-	if (*nb < 0)
+	number = nb;
+	if (number == 0)
+		return (0 + '0');
+	if (number > 0)
 	{
-		*nb *= -1;
-		buffer[0] = '-';
-		if (*nb < 10)
-		{
-			temp = *nb + '0';
-			buffer[1] = temp;
-			return (0);
-		}
-		return  (2);
+		spe_putnbr(number / 10);
+		number %= 10;
 	}
-	else if (*nb < 10)
+	return (number + '0');
+}
+
+static int	is_neg(int nb)
+{
+	if (nb < 0)
+		return (1);
+	return (0);
+}
+
+static size_t	get_len(int n)
+{
+	size_t			len;
+	unsigned int	number;
+
+	len = 0;
+	if (is_neg(n))
 	{
-		temp = *nb + '0';
-		buffer[0] = temp;
-		return (0);
+		number = (unsigned int)-n;
+		len++;
 	}
-	return (1);
+	else
+		number = (unsigned int)n;
+	while (number > 9)
+	{
+		number /= 10;
+		len++;
+	}
+	len++;
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	char	buffer[12];
-	char	reverse_buffer[12];
-	size_t	lenght;
-	size_t	i;
+	char			*result;
+	size_t			len;
+	unsigned int	num;
+	int				i;
 
+	len = get_len(n);
+	result = malloc(sizeof(char) * (len + 1));
+	if (result == NULL)
+		return (NULL);
 	i = 0;
-	lenght = 0;
-	if (n == INT_MIN)
-		return (ft_strdup("-2147483648"));
-	else if (n == INT_MAX)
-		return (ft_strdup("2147483647"));
-	ft_memset(reverse_buffer, 0, 12 * sizeof(char));
-	ft_memset(buffer, 0, 12 * sizeof(char));
-	if (!ft_putnbr_sp(&n, buffer))
-		return (ft_strdup(buffer));
-	if (buffer[0] == '-')
-		i++;
-	while (n >= 1)
+	if (is_neg(n))
+		num = (unsigned int)-n;
+	else
+		num = (unsigned int)n;
+	while (i++ <= (int)len - 1)
 	{
-		reverse_buffer[lenght++] = (n % 10) + '0';
-		n /= 10;
+		result[(int)len - i] = spe_putnbr(num);
+		num /= 10;
 	}
-	while (i <= lenght)
-	{
-		if (buffer[0] == '-')
-			buffer[i] = reverse_buffer[lenght - i];
-		else
-			buffer[i] = reverse_buffer[lenght - i - 1];
-		i++;
-	}
-	return (ft_strdup(buffer));
+	if (is_neg(n))
+		result[0] = '-';
+	result[len] = '\0';
+	return (result);
 }

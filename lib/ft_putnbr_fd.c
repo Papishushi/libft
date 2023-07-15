@@ -5,34 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 20:36:08 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/26 18:06:42 by dmoliner         ###   ########.fr       */
+/*   Created: 2023/01/08 18:17:58 by dmoliner          #+#    #+#             */
+/*   Updated: 2023/01/08 18:17:59 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned char	temp;
-
 	if (n < 0)
 	{
 		if (n == INT_MIN)
 		{
-			write(fd, "-2147483648", 12);
+			ft_putstr_fd("-2147483648", fd);
 			return ;
 		}
-		write (fd, "-", 1);
-		n *= -1;
+		ft_putchar_fd('-', fd);
+		n = -n;
 	}
-	if (n / 10 >= 1)
+	if (n >= 10)
 	{
 		ft_putnbr_fd(n / 10, fd);
 		ft_putnbr_fd(n % 10, fd);
 	}
-	temp = n + '0';
-	if (ft_isdigit(temp))
-		write(fd, &temp, 1);
+	else
+		ft_putchar_fd(n + '0', fd);
 }

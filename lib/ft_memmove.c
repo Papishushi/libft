@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmoliner <dmoliner@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/10/05 11:48:10 by dmoliner         ###   ########.fr       */
+/*   Created: 2023/01/08 18:17:18 by dmoliner          #+#    #+#             */
+/*   Updated: 2023/01/08 18:17:21 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,35 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t			i;
-	size_t			count;
-	unsigned char	*srcc;
-	unsigned char	*dstc;
+	unsigned char	*d;
+	unsigned char	*s;
+	unsigned char	*lastd;
+	unsigned char	*lasts;
 
-	if (src == dst)
-		return (dst);
-	i = 0;
-	srcc = (unsigned char *)src;
-	dstc = (unsigned char *)dst;
-	count = dstc - srcc;
-	while (i < len)
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	if (!dst && !src)
+		return (0);
+	if (d < s)
+		while (len--)
+			*d++ = *s++;
+	else
 	{
-		if (srcc < dstc && srcc <= dstc + len)
-		{
-			if (i >= count)
-				return (dst);
-			else if (i + count < len)
-				dstc[i + count] = dstc[i];
-		}
-		dstc[i] = srcc[i];
-		i++;
+		lasts = s + (len - 1);
+		lastd = d + (len - 1);
+		while (len--)
+			*lastd-- = *lasts--;
 	}
 	return (dst);
 }
+
+// int	main(void)
+// {
+// 	char src[15] = "lorem ipsum";
+// 	char dst[20] = "dolor sit amet";
+// 	size_t len = 3;
+
+// 	printf("src: %s [ %p ]\n", src, &src);
+// 	printf("dst: %s [ %p ]\n", dst, &dst);
+// 	printf("-> dst: %s\n", ft_memmove(src, dst, len));
+// }

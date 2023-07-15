@@ -5,75 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 20:41:44 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/26 18:20:29 by dmoliner         ###   ########.fr       */
+/*   Created: 2023/01/08 18:19:34 by dmoliner          #+#    #+#             */
+/*   Updated: 2023/01/08 18:19:36 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "stdio.h"
 
-static unsigned char	contains(char const *set, const char c)
+static	size_t	trimornot(char const *set, char c)
 {
 	while (*set)
-		if (*(set++) == c)
+		if (*set++ == c)
 			return (1);
 	return (0);
-}
-
-static unsigned char	matches(char const *set, char const *input)
-{
-	while (*set == *input)
-	{
-		if (!contains(set, *input))
-			return (1);
-		input++;
-		if (*set != *input)
-			set++;
-		else if (!*set)
-			return (1);
-	}
-	return (0);
-}
-
-static char	*count_noset(size_t *count, char const *s1, char const *set)
-{
-	size_t	i;
-	char	*start;
-
-	i = 0;
-	start = (char *)s1;
-	while (contains(set, *(s1++)))
-		start++;
-	while (start[i])
-	{
-		if (matches(set, start + i))
-			return (start);
-		if (!contains(set, start[i++]))
-			(*count)++;
-	}
-	return (start);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	char	*str;
+	size_t	start;
+	size_t	end;
 	size_t	i;
-	size_t	count;
-	char	*start;
-	char	*buffer;
+	size_t	len;
 
 	i = 0;
-	count = 0;
-	if (s1 == 0 || *s1 == 0)
-		return ((char *)ft_calloc(1, sizeof(char)));
-	start = count_noset(&count, s1, set);
-	buffer = (char *)ft_calloc(count + 1, sizeof(char));
-	if (!buffer)
+	if (!s1 || !set)
 		return (0);
-	while (i < count)
-	{
-		buffer[i] = start[i];
-		i++;
-	}
-	return (buffer);
+	start = 0;
+	end = ft_strlen(s1);
+	while (trimornot(set, s1[start]) == 1)
+		start++;
+	while (end > start && trimornot(set, s1[end - 1]) == 1)
+		end--;
+	len = end - start;
+	str = ft_calloc(sizeof(*s1), (len + 1));
+	if (!str)
+		return (0);
+	while (i < len)
+		str[i++] = s1[start++];
+	str[i] = '\0';
+	return (str);
 }

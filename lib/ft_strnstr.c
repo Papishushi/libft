@@ -5,50 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmoliner <dmoliner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 23:54:39 by dmoliner          #+#    #+#             */
-/*   Updated: 2022/09/17 19:26:17 by dmoliner         ###   ########.fr       */
+/*   Created: 2023/01/08 18:16:50 by dmoliner          #+#    #+#             */
+/*   Updated: 2023/01/08 18:16:52 by dmoliner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int	update_count(const char **s, size_t i, \
-						size_t len, size_t *count)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	if (s[0][i] == s[1][len - *count])
+	size_t	aux;
+
+	if (!ft_strlen(needle))
+		return ((char *)haystack);
+	if (!haystack && !len)
+		return (0);
+	aux = 0;
+	while (aux < len && haystack[aux] != 0)
 	{
-		(*count)--;
-		return (1);
+		if (ft_strncmp((char *)&haystack[aux], (char *)needle, \
+		ft_strlen(needle)) == 0)
+		{
+			if (aux + ft_strlen(needle) > len)
+				return (0);
+			return ((char *)&haystack[aux]);
+		}
+		aux++;
 	}
 	return (0);
 }
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-	size_t	len;
-	size_t	count;
-
-	i = 0;
-	len = ft_strlen(s2);
-	count = len;
-	if (*s2 == 0)
-		return ((char *)s1);
-	while (i < n && s1[i])
-	{
-		if (!update_count((const char *[]){s1, s2}, i, len, &count))
-		{
-			count = len;
-			update_count((const char *[]){s1, s2}, i, len, &count);
-		}
-		if (count == 0)
-		{
-			if (i == len - 1)
-				return ((char *)s1);
-			return ((char *)s1 + i - len + 1);
-		}
-		i++;
-	}
-	return (0);
-}
+// int	main(void)
+// {
+// 	printf("   strnstr: %s\n", strnstr("fake", NULL, 3));
+// 	printf("ft_strnstr: %s\n", ft_strnstr("fake", NULL, 3));
+// 	return (0);
+// }
